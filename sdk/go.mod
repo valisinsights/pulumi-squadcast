@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-xyz/sdk
+module github.com/valisinsights/pulumi-squadcast/sdk
 
 go 1.17
 

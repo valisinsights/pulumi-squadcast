@@ -1,3 +1,3 @@
-module github.com/pulumi/pulumi-xyz/examples
+module github.com/valisinsights/pulumi-squadcast/examples
 
 go 1.16
