@@ -370,7 +370,7 @@ builds:
   - linux
   ignore: []
   ldflags:
-  - -X github.com/pulumi/pulumi-squadcast/provider/pkg/version.Version={{.Tag}}
+  - -X github.com/valisinsights/pulumi-squadcast/provider/pkg/version.Version={{.Tag}}
   main: ./cmd/pulumi-resource-squadcast/
   sort: asc
   use: git

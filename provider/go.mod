@@ -3,14 +3,15 @@ module github.com/valisinsights/pulumi-squadcast/provider
 go 1.18
 
 replace (
-	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20220824175045-450992f2f5b9
+	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20230710100801-03a71d0fca3d
 	github.com/squadcast/terraform-provider-squadcast => github.com/SquadcastHub/terraform-provider-squadcast v1.4.4
+	github.com/squadcast/terraform-provider-squadcast/shim => ./shim
 )
 
 require (
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.54.1
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.54.2
 	github.com/pulumi/pulumi/sdk/v3 v3.75.0
-	github.com/squadcast/terraform-provider-squadcast v1.4.4
+	github.com/squadcast/terraform-provider-squadcast/shim v0.0.0
 )
 
 require (
@@ -133,7 +134,6 @@ require (
 	github.com/hashicorp/terraform-plugin-go v0.16.0 // indirect
 	github.com/hashicorp/terraform-plugin-log v0.9.0 // indirect
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.26.0 // indirect
-	github.com/hashicorp/terraform-registry-address v0.2.1 // indirect
 	github.com/hashicorp/terraform-svchost v0.1.1 // indirect
 	github.com/hashicorp/vault/api v1.8.2 // indirect
 	github.com/hashicorp/vault/sdk v0.6.1 // indirect
@@ -200,6 +200,7 @@ require (
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/cobra v1.7.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/squadcast/terraform-provider-squadcast v1.4.4 // indirect
 	github.com/stretchr/testify v1.8.3 // indirect
 	github.com/texttheater/golang-levenshtein v1.0.1 // indirect
 	github.com/tweekmonster/luser v0.0.0-20161003172636-3fa38070dbd7 // indirect

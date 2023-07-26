@@ -24,7 +24,7 @@ import (
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 
 	"github.com/valisinsights/pulumi-squadcast/provider/pkg/version"
-	"github.com/squadcast/terraform-provider-squadcast"
+	squadcast "github.com/squadcast/terraform-provider-squadcast/shim"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 )
 
@@ -48,7 +48,8 @@ func preConfigureCallback(vars resource.PropertyMap, c shim.ResourceConfig) erro
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
 	// Instantiate the Terraform provider
-	p := shimv2.NewProvider(squadcast.Provider())
+	sp := squadcast.New("1.4.4");
+	p := shimv2.NewProvider(sp());
 
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
@@ -82,7 +83,7 @@ func Provider() tfbridge.ProviderInfo {
 		Repository: "https://github.com/valisinsights/pulumi-squadcast",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
 		// should match the TF provider module's require directive, not any replace directives.
-		GitHubOrg: "",
+		GitHubOrg: "squadcast",
 		Config:    map[string]*tfbridge.SchemaInfo{
 			// Add any required configuration here, or remove the example below if
 			// no additional points are required.
@@ -95,6 +96,24 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		PreConfigureCallback: preConfigureCallback,
 		Resources:            map[string]*tfbridge.ResourceInfo{
+			"squadcast_deduplication_rules":  {Tok: tfbridge.MakeResource(mainPkg, mainMod, "DeduplicationRules")},
+			"squadcast_escalation_policy":    {Tok: tfbridge.MakeResource(mainPkg, mainMod, "EscalationPolicy")},
+			"squadcast_routing_rules":        {Tok: tfbridge.MakeResource(mainPkg, mainMod, "RoutingRules")},
+			"squadcast_runbook":              {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Runbook")},
+			"squadcast_schedule":             {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Schedule")},
+			"squadcast_schedule_v2":          {Tok: tfbridge.MakeResource(mainPkg, mainMod, "ScheduleV2")},
+			"squadcast_schedule_rotation_v2": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "ScheduleRotationV2")},
+			"squadcast_service_maintenance":  {Tok: tfbridge.MakeResource(mainPkg, mainMod, "ServiceMaintenance")},
+			"squadcast_service":              {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Service")},
+			"squadcast_squad":                {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Squad")},
+			"squadcast_suppression_rules":    {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SuppressionRules")},
+			"squadcast_tagging_rules":        {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TaggingRules")},
+			"squadcast_team_member":          {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TeamMember")},
+			"squadcast_team_role":            {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TeamRole")},
+			"squadcast_team":                 {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Team")},
+			"squadcast_user":                 {Tok: tfbridge.MakeResource(mainPkg, mainMod, "User")},
+			"squadcast_slo":                  {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SLO")},
+			"squadcast_webform":              {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Sebform")},
 			// Map each resource in the Terraform provider to a Pulumi type. Two examples
 			// are below - the single line form is the common case. The multi-line form is
 			// needed only if you wish to override types or other default options.
@@ -112,6 +131,16 @@ func Provider() tfbridge.ProviderInfo {
 			// Map each resource in the Terraform provider to a Pulumi function. An example
 			// is below.
 			// "aws_ami": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getAmi")},
+			"squadcast_squad":             {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSquad")},
+			"squadcast_service":           {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getService")},
+			"squadcast_escalation_policy": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getEscalationPolicy")},
+			"squadcast_team":              {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTeam")},
+			"squadcast_team_role":         {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTeamRole")},
+			"squadcast_user":              {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getUser")},
+			"squadcast_schedule":          {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSchedule")},
+			"squadcast_schedule_v2":       {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getScheduleV2")},
+			"squadcast_runbook":           {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getRunbook")},
+			"squadcast_webform":           {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getWebform")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			// List any npm dependencies and their versions
@@ -154,7 +183,8 @@ func Provider() tfbridge.ProviderInfo {
 	// For more information, please reference: https://pkg.go.dev/github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge#ProviderInfo.ComputeTokens
 	prov.MustComputeTokens(tokens.SingleModule("squadcast_", mainMod,
 		tokens.MakeStandard(mainPkg)))
-	prov.MustApplyAutoAliasing()
+	// TODO: Why is this not available?
+	// prov.MustApplyAutoAliasing()
 	prov.SetAutonaming(255, "-")
 
 	return prov

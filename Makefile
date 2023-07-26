@@ -2,7 +2,7 @@ PROJECT_NAME := squadcast Package
 
 SHELL            := /bin/bash
 PACK             := squadcast
-ORG              := pulumi
+ORG              := valisinsights
 PROJECT          := github.com/${ORG}/pulumi-${PACK}
 NODE_MODULE_NAME := @pulumi/${PACK}
 TF_NAME          := ${PACK}
