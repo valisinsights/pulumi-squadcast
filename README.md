@@ -1,4 +1,4 @@
-# Foo Resource Provider
+# Squadcast Resource Provider
 
 The Squadcast Resource Provider lets you manage [Squadcast](https://www.squadcast.com/) resources.
 
