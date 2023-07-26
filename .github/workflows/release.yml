@@ -3,6 +3,8 @@ on:
   push:
     tags:
       - v*.*.*
+
+  
 env:
   NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
   NUGET_FEED_URL: https://api.nuget.org/v3/index.json
@@ -24,6 +26,8 @@ jobs:
   publish_binary:
     name: publish
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v2
