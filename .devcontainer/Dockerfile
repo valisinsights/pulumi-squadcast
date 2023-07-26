@@ -25,7 +25,7 @@ ENV PATH=$PATH:/usr/local/go/bin
 
 # Install go linter
 RUN mkdir -p $GOPATH/bin && \
-    curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $GOPATH/bin v1.46.2
+    curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $GOPATH/bin v1.53.3
 
 ENV PATH=$PATH:$GOPATH/bin
 
@@ -36,7 +36,7 @@ RUN rm -rf /usr/local/bin/pulumictl && \
     tar -C /usr/local/bin -xzf pulumictl.${PULUMICTL_VERSION}.tar.gz
 
 # Install nodejs
-ARG NODEJS_VERSION=v16.16.0
+ARG NODEJS_VERSION=v16.20.1
 ARG NODEJS_PKG=node-${NODEJS_VERSION}-linux-x64
 ARG NODEJS_TARBALL=${NODEJS_PKG}.tar.xz
 RUN rm -rf /usr/local/node && \

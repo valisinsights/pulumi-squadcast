@@ -19,8 +19,8 @@ package main
 import (
 	_ "embed"
 
-	squadcast "github.com/valisinsights/pulumi-squadcast/provider"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	squadcast "github.com/valisinsights/pulumi-squadcast/provider"
 	"github.com/valisinsights/pulumi-squadcast/provider/pkg/version"
 )
 

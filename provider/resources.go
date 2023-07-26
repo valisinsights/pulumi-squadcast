@@ -23,9 +23,9 @@ import (
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 
-	"github.com/valisinsights/pulumi-squadcast/provider/pkg/version"
-	squadcast "github.com/squadcast/terraform-provider-squadcast/shim"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
+	squadcast "github.com/squadcast/terraform-provider-squadcast/shim"
+	"github.com/valisinsights/pulumi-squadcast/provider/pkg/version"
 )
 
 // all of the token components used below.
@@ -48,8 +48,8 @@ func preConfigureCallback(vars resource.PropertyMap, c shim.ResourceConfig) erro
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
 	// Instantiate the Terraform provider
-	sp := squadcast.New("1.4.4");
-	p := shimv2.NewProvider(sp());
+	sp := squadcast.New("1.4.4")
+	p := shimv2.NewProvider(sp())
 
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
@@ -95,7 +95,7 @@ func Provider() tfbridge.ProviderInfo {
 			// },
 		},
 		PreConfigureCallback: preConfigureCallback,
-		Resources:            map[string]*tfbridge.ResourceInfo{
+		Resources: map[string]*tfbridge.ResourceInfo{
 			"squadcast_deduplication_rules":  {Tok: tfbridge.MakeResource(mainPkg, mainMod, "DeduplicationRules")},
 			"squadcast_escalation_policy":    {Tok: tfbridge.MakeResource(mainPkg, mainMod, "EscalationPolicy")},
 			"squadcast_routing_rules":        {Tok: tfbridge.MakeResource(mainPkg, mainMod, "RoutingRules")},
@@ -180,7 +180,7 @@ func Provider() tfbridge.ProviderInfo {
 
 	// These are new API's that you may opt to use to automatically compute resource tokens,
 	// and apply auto aliasing for full backwards compatibility.
-	// For more information, please reference: https://pkg.go.dev/github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge#ProviderInfo.ComputeTokens
+	// See https://pkg.go.dev/github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge#ProviderInfo.ComputeTokens
 	prov.MustComputeTokens(tokens.SingleModule("squadcast_", mainMod,
 		tokens.MakeStandard(mainPkg)))
 	// TODO: Why is this not available?
