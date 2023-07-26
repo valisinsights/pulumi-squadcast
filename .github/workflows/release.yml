@@ -51,6 +51,7 @@ jobs:
         distribution: goreleaser
         args: -p 3 release --clean
         version: latest
+    # TODO: build and verify worktree clean (https://github.com/pulumi/pulumi-aws/blob/v5.42.0/.github/workflows/release.yml#L98)
     - name: Compress dotnet SDK folder
       run: tar -zcf sdk/dotnet.tar.gz -C sdk/dotnet . # TODO: Matrix
     - name: Upload SDK artifacts
