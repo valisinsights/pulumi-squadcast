@@ -116,7 +116,7 @@ jobs:
       run: make build_${{ matrix.language }}
       # TODO: Check worktree is clean
     - name: Compress SDK folder
-      run: tar -zcf sdk/${{ matrix.language }}.tar.gz -C sdk/${{ matrix.language }} .
+      run: tar -zcvf sdk/${{ matrix.language }}.tar.gz -C sdk/${{ matrix.language }} .
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
@@ -166,7 +166,7 @@ jobs:
         version: latest
     # TODO: build and verify worktree clean (https://github.com/pulumi/pulumi-aws/blob/v5.42.0/.github/workflows/release.yml#L98)
     - name: Compress dotnet SDK folder
-      run: tar -zcf sdk/dotnet.tar.gz -C sdk/dotnet . # TODO: Matrix
+      run: tar -zcvf sdk/dotnet.tar.gz -C sdk/dotnet . # TODO: Matrix
     - name: Upload SDK artifacts
       uses: actions/upload-artifact@v2
       with:
