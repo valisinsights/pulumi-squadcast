@@ -28,6 +28,5 @@ import (
 var pulumiSchema []byte
 
 func main() {
-	// Modify the path to point to the new provider
 	tfbridge.Main("squadcast", version.Version, squadcast.Provider(), pulumiSchema)
 }
