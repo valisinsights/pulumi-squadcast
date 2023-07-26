@@ -24,7 +24,7 @@ env:
   # PYPI_REPOSITORY_URL: ""
   # PUBLISH_PYPI: true
 
-jobs:
+jobs:    
   publish_binary:
     name: publish
     runs-on: ubuntu-latest
@@ -51,6 +51,13 @@ jobs:
         distribution: goreleaser
         args: -p 3 release --clean
         version: latest
+    - name: Compress dotnet SDK folder
+      run: tar -zcf sdk/dotnet.tar.gz -C sdk/dotnet . # TODO: Matrix
+    - name: Upload SDK artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: dotnet-sdk.tar.gz # TODO: Matrix
+        path: ${{ github.workspace}}/sdk/dotnet.tar.gz # TODO: Matrix
     strategy:
       fail-fast: true
       matrix:
