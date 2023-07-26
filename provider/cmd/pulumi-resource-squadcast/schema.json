@@ -1,5 +1,6 @@
 {
     "name": "squadcast",
+    "displayName": "Squadcast",
     "description": "A Pulumi package for creating and managing squadcast cloud resources.",
     "keywords": [
         "pulumi",
@@ -10,7 +11,7 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`squadcast` Terraform Provider](https://github.com/squadcast/terraform-provider-squadcast).",
     "repository": "https://github.com/valisinsights/pulumi-squadcast",
-    "publisher": "Pulumi",
+    "publisher": "valisinsights",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
     },
