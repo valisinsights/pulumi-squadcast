@@ -64,7 +64,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        language:
+        sdk:
           # - nodejs
           # - python
           - dotnet
